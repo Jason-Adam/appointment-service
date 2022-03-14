@@ -25,8 +25,6 @@ func GetAppointmentsByTrainerAndDates(svc appointment.Service) fiber.Handler {
 			return c.JSON(errorResponse(errParseTrainerID))
 		}
 
-		log.Println(tID)
-
 		// Parse start
 		start := c.Query("start", time.Now().Format(time.RFC3339))
 		startsAt, err := time.Parse(time.RFC3339, start)
@@ -35,16 +33,12 @@ func GetAppointmentsByTrainerAndDates(svc appointment.Service) fiber.Handler {
 			startsAt = time.Now()
 		}
 
-		log.Println(startsAt)
-
 		end := c.Query("end")
 		endsAt, err := time.Parse(time.RFC3339, end)
 		if err != nil {
 			log.Println("missing or unable to parse end param - defaulting to 4 week window")
 			endsAt = startsAt.Add(28 * 24 * time.Hour)
 		}
-
-		log.Println(endsAt)
 
 		appointments, err := svc.GetAppointmentsByTrainerAndDates(c.Context(), tID, startsAt, endsAt)
 		if err != nil {
