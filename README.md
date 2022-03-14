@@ -1,4 +1,5 @@
 # Appointment Service  
+[![Tests](https://github.com/Jason-Adam/appointment-service/actions/workflows/test.yaml/badge.svg)](https://github.com/Jason-Adam/appointment-service/actions/workflows/test.yaml)  
 A service for viewing and booking appointments between a trainer and client.
 
 ## How do I run the service?  
@@ -70,6 +71,12 @@ The body of the request needs to look like the following:
 ```  
 
 `id` is the appointment ID you are attempting to book. `user_id` is the client.  
+
+A sample call looks like:  
+
+```bash  
+curl -X POST http://localhost:8080/api/appointments -H "Content-Type: application/json" -d '{"id": 13, "user_id": 2}'
+```
 
 ## Next Steps & Notes  
 * The current implementation uses PostgreSQL as it's persistance layer. The appointment bookings are done with Transactions utilizing a Repeatable Read isolation level. The database is initialized with the SQL code in `sql/structure.sql`. It contains some initial inserts to seed appointments.
