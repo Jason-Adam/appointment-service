@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    volumes:
+      - ./sql/structure.sql:/docker-entrypoint-initdb.d/structure.sql
+    user: postgres
+    environment:
+      POSTGRES_DB: appt 
+      POSTGRES_USER: postgres 
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - .:/opt/app/api
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgres://postgres@db/appt?sslmode=disable
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
