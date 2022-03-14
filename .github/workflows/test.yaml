@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: run tests
-    runs-on: golang:1.17
+    runs-on: ubuntu-18.04
 
     steps:
       - name: checkout
