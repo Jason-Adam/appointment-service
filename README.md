@@ -1,5 +1,5 @@
 # Appointment Service  
-[![Tests](https://github.com/Jason-Adam/appointment-service/actions/workflows/test.yaml/badge.svg)](https://github.com/Jason-Adam/appointment-service/actions/workflows/test.yaml)  
+[![Tests](https://github.com/Jason-Adam/appointment-service/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/Jason-Adam/appointment-service/actions/workflows/test.yaml)  
 A service for viewing and booking appointments between a trainer and client.
 
 ## How do I run the service?  
